@@ -1,0 +1,173 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>Suigetsu</title>
+    <style>
+      body {
+        margin: 0px;
+        padding: 0px;
+      }
+      #container {
+        background-color: #fff;
+        display: inline-block;
+        width: 580px;
+        height: 500px;
+      }
+      canvas {
+        border: 1px solid #9C9898;
+      }
+    </style>
+  </head>
+  <body>
+    
+    <div id="container"></div>
+    <script src="../lib/kinetic-v4.5.0.min.js"></script>
+    <script>
+      var stage = new Kinetic.Stage({
+        container: 'container',
+        width: 578,
+        height: 500
+      });
+      var layer = new Kinetic.Layer();
+      var animations = {
+        idle: [{
+          x: 1,
+          y: 1,
+          width: 96,
+          height: 96
+        }, {
+          x: 98,
+          y: 1,
+          width: 96,
+          height: 96
+        }, {
+          x: 198,
+          y: 1,
+          width: 96,
+          height: 96
+        }], //--------
+        run :[{
+          x: 1,
+          y: 98,
+          width: 96,
+          height: 96
+        },{
+          x: 98,
+          y: 98,
+          width: 96,
+          height: 96
+        },{
+          x: 198,
+          y: 98,
+          width: 96,
+          height: 96
+        },{
+          x: 296,
+          y: 98,
+          width: 96,
+          height: 96
+        },{
+          x: 394,
+          y: 98,
+          width: 96,
+          height: 96
+        },{
+          x: 492,
+          y: 98,
+          width: 96,
+          height: 96
+        }], // ---------
+        kaspoz:[{
+          x: 1,
+          y: 196,
+          width: 96,
+          height: 96
+        },{
+          x: 98,
+          y: 196,
+          width: 96,
+          height: 96
+        },{
+          x: 198,
+          y: 196,
+          width: 96,
+          height: 96
+        },{
+          x: 296,
+          y: 196,
+          width: 96,
+          height: 96
+        },{
+          x: 394,
+          y: 196,
+          width: 96,
+          height: 96
+        },{
+          x: 492,
+          y: 196,
+          width: 96,
+          height: 96
+        },{
+          x: 590,
+          y: 196,
+          width: 96,
+          height: 96
+        }]
+      };
+
+      var imageObj = new Image();
+      imageObj.onload = function() {
+        var blob = new Kinetic.Sprite({
+          x: 250,
+          y: 40,
+          image: imageObj,
+          animation: 'idle',
+          animations: animations,
+          frameRate: 7,
+        });
+
+        // add the shape to the layer
+        layer.add(blob);
+
+        // add the layer to the stage
+        stage.add(layer);
+        blob.start();
+        
+        
+        // Stop animation
+        document.addEventListener('keydown', function(e) {
+ 
+          var unicode= e.keyCode;
+          if(unicode == 39 ){
+            blob.setAnimation('run');
+          }
+
+        }, false);
+
+        document.addEventListener('keyup', function(e) {
+ 
+          var unicode= e.keyCode;
+          if(unicode == 39 ){
+            blob.setAnimation('idle');
+          }
+
+        }, false);
+
+        document.addEventListener('keydown', function(e) {
+ 
+          var unicode= e.keyCode;
+          if(unicode == 75 ){
+            blob.setAnimation('kaspoz');
+            blob.afterFrame(5, function(){
+                blob.stop();
+            });
+          }
+
+        }, false);
+
+        }; 
+      imageObj.src = 'suigetsu.png';
+    </script>
+   
+  </body>
+</html>
